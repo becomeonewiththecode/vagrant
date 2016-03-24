@@ -1,3 +1,13 @@
+All about Vagrant
+
+Collections of documents and Vagrantfiles used to provision VM's within
+cloud providers.
+
+- AWS
+- Digital Ocean
+- Linode
+- Google Cloud Compute
+
 Overview
 "To achieve its magic, Vagrant stands on the shoulders of giants.
 Machines are provisioned on top of VirtualBox, VMware, AWS, or any other provider.
@@ -66,6 +76,7 @@ Executing commands on an image
 				22 (guest) => 2222 (host)
 	vagrant up 							- Starts the process of creating and starting the VM by default on Virtualbox
 	vagrant up --provision	- restart an image, (--provision option means to skip the provisioning process).
+
 			vagrant up --provision
 			Bringing machine 'default' up with 'virtualbox' provider...
 			==> default: Checking if box 'AntonioMeireles/coreos-stable' is up to date...
@@ -149,8 +160,11 @@ Create a new Virtualbox Project
 						-rw-rw-r-- 1 oss oss  135 Mar  9 16:35 synced_folders
 
 Remove stale Images from vagrant global-status output
+Sometimes there are lingering servers within the list for reason of either renaming, removing a project that was instantiated.
+To remove stale images from the list use
 
-	command: vagrant global-status
+	command: vagrant global-status --prune
+
 	id       name      provider      state    directory
 	-----------------------------------------------------------------------------------------
 	1da5356  default   virtualbox    poweroff /home/oss/automation/vagrant-env/coreos-stable
@@ -161,13 +175,10 @@ Remove stale Images from vagrant global-status output
 	2bc9a35  dbsrv001  digital_ocean active   /home/oss/automation/vagrant-env/digital_ocean
 	6a485da  dbsrv002  digital_ocean active   /home/oss/automation/vagrant-env/digital_ocean
 
-	Sometimes there are lingering servers within the list for reason of either renaming, removing a project that was instantiated.
-	To remove stale images from the list use
-	vagrant global-list --prune
-	will remove any stale images that is listed in the list but does not exist within any environments.
-
 Show connection parameters for a configured virtual machine.
+
 	command: vagrant ssh-config vagrantsrv001
+
 	Host vagrantsrv001
 	  HostName 162.243.89.19
 	  User root
@@ -178,3 +189,29 @@ Show connection parameters for a configured virtual machine.
 	  IdentityFile "/home/oss/automation/vagrant-env/providers/cloud-platforms/digital_ocean/ansible/playbooks/id_rsa"
 	  IdentitiesOnly yes
 	  LogLevel FATAL
+
+Rebuild VM and run the provisioning software in this case ansible
+
+Rebuild VM
+  command: Vagrant rebuild
+  Use this command to rebuild the vm if you modified either the provisioning script (ansible playbook) or Vagrantfile.
+  vagrant rebuild
+    ==> default: Rebuilding the droplet...
+    ==> default: Rsyncing folder: /home/oss/automation/vagrant-env/digital_ocean/ => /vagrant...
+    ==> default: Running provisioner: ansible...
+      default: Running ansible-playbook...
+      [DEPRECATION WARNING]: Instead of sudo/sudo_user, use become/become_user and
+      make sure become_method is 'sudo' (default). This feature will be removed in a
+      future release. Deprecation warnings can be disabled by setting
+      deprecation_warnings=False in ansible.cfg.
+
+      PLAY ***************************************************************************
+
+      TASK [setup] *******************************************************************
+      ok: [default]
+
+      TASK [Install Packages] ********************************************************
+      changed: [default] => (item=[u'git', u'curl', u'apache2'])
+
+      PLAY RECAP *********************************************************************
+      default                    : ok=2    changed=1    unreachable=0    failed=0
