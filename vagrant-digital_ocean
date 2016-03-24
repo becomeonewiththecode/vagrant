@@ -1,14 +1,15 @@
 
 Building Digital Ocean Droplets
 
-Vagrantfile
+Vagrantfile:
+
   ENV['VAGRANT_DEFAULT_PROVIDER'] = 'digital_ocean'
   Vagrant.configure(2) do |config|
     config.vm.box = "digital_ocean"
     config.vm.hostname = 'devsrv.opensitesolutions.com'
     config.ssh.private_key_path = '~/.ssh/id_rsa'
     config.vm.provider :digital_ocean do |provider|
-      provider.token = '6cbdb1572816b5bfab6c07309e9772ad4e030fb7df361e051ca744fa49cfc819'
+      provider.token = 'TOKEN ID'
       provider.image = 'ubuntu-14-04-x64'
       provider.region = 'nyc2'
       provider.size = '512mb'
@@ -19,32 +20,3 @@ Vagrantfile
       ansible.verbose = 'vv' #accepted values: from 'v' to 'vvvv'
   end
 end
-
-
-2. Spin up the VM
-  vagrant up
-  Since the file has ENV['VAGRANT_DEFAULT_PROVIDER'] = 'digital_ocean' there's no need to specify a provider on th CLI
-
-Rebuild VM
-  Vagrant rebuild
-  Use this command to rebuild the vm if you modified either the provisioning script (ansible playbook) or Vagrantfile.
-  vagrant rebuild
-    ==> default: Rebuilding the droplet...
-    ==> default: Rsyncing folder: /home/oss/automation/vagrant-env/digital_ocean/ => /vagrant...
-    ==> default: Running provisioner: ansible...
-      default: Running ansible-playbook...
-      [DEPRECATION WARNING]: Instead of sudo/sudo_user, use become/become_user and
-      make sure become_method is 'sudo' (default). This feature will be removed in a
-      future release. Deprecation warnings can be disabled by setting
-      deprecation_warnings=False in ansible.cfg.
-
-      PLAY ***************************************************************************
-
-      TASK [setup] *******************************************************************
-      ok: [default]
-
-      TASK [Install Packages] ********************************************************
-      changed: [default] => (item=[u'git', u'curl', u'apache2'])
-
-      PLAY RECAP *********************************************************************
-      default                    : ok=2    changed=1    unreachable=0    failed=0
