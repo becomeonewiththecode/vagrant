@@ -1,0 +1,125 @@
+
+
+Vagrantfile:
+Vagrant.configure('2') do |config|
+
+  config.vm.provider :linode do |provider, override|
+    override.ssh.private_key_path = '~/.ssh/id_rsa'
+    #override.vm.box = 'linode/ubuntu1404'
+    #override.vm.box_url = "https://github.com/displague/vagrant-linode/raw/master/box/linode.box"
+    config.vm.box = 'linode/ubuntu1404'
+
+    provider.api_key = 'PDBQmEZf4jd4llBXVRkvEOKAIoYlkiqCu6D1EvecyGFaEoq0vDSuuCFuSr6SbrCd'
+    provider.distribution = 'Ubuntu 14.04'
+    provider.datacenter = 'fremont'
+    provider.plan = 'Linode 1024'
+    #provider.planid = 1
+    # provider.planid = <int>
+    # provider.paymentterm = <*1*,12,24>
+    # provider.datacenterid = <int>
+    # provider.image = <string>
+    # provider.imageid = <int>
+    # provider.kernel = <string>
+    # provider.kernelid = <int>
+    # provider.private_networking = <boolean>
+    # provider.stackscript = <string> # Not Supported Yet
+    # provider.stackscriptid = <int> # Not Supported Yet
+    # provider.distributionid = <int>
+
+    # Shell Scripts
+    config.vm.provision :shell, path: "setup.sh"
+    config.vm.provision :shell, path: "apache.sh"
+  end
+end
+
+
+Get a list of Operating System images Linode provides.
+    Command: vagrant linode distributions
+          ==> default: ID   Size   Distribution Name
+          ==> default: 60   950    CentOS 5.6
+          ==> default: 78   550    Debian 6
+          ==> default: 86   600    Slackware 13.37 32bit
+          ==> default: 87   600    Slackware 13.37
+          ==> default: 117  1000   Slackware 14.1
+          ==> default: 118  3072   Gentoo 2013-11-26
+          ==> default: 120  1024   openSUSE 13.1
+          ==> default: 122  1536   Fedora 20
+          ==> default: 124  750    Ubuntu 14.04 LTS
+          ==> default: 126  550    Ubuntu 12.04 LTS
+          ==> default: 127  675    CentOS 6.5
+          ==> default: 129  750    CentOS 7
+          ==> default: 130  600    Debian 7
+          ==> default: 134  650    Fedora 21
+          ==> default: 135  700    openSUSE 13.2
+          ==> default: 137  2000   Gentoo 2014.12
+          ==> default: 138  800    Arch Linux 2015.02
+          ==> default: 139  1500   Ubuntu 15.04
+          ==> default: 140  900    Debian 8.1
+          ==> default: 141  650    Fedora 22
+          ==> default: 142  800    Arch Linux 2015.08
+          ==> default: 144  1500   Ubuntu 15.10
+
+    Change distribution option after the equal sign provider.distribution = 'Ubuntu 14.04' to anything in the list above
+
+Get a list of Datacenter locations
+    Command: vagrant linode datacenters
+          ==> default: Datacenter ID   Location                             Abbr
+          ==> default: 2               Dallas, TX, USA                      dallas
+          ==> default: 3               Fremont, CA, USA                     fremont
+          ==> default: 4               Atlanta, GA, USA                     atlanta
+          ==> default: 6               Newark, NJ, USA                      newark
+          ==> default: 7               London, England, UK                  london
+          ==> default: 8               Tokyo, JP                            tokyo
+          ==> default: 9               Singapore, SG                        singapore
+          ==> default: 10              Frankfurt, DE                        frankfurt
+    Change the datacenter location(fremont) provider.datacenter = 'fremont' to anything from the list above, use the column labeled "Abbr"
+
+Get a list of plans provided by Linode.
+    Command: vagrant linode plans
+          ==> default: Plan ID                              Plan Name
+          ==> default: 1                                    Linode 1024
+          ==> default: 2                                    Linode 2048
+          ==> default: 4                                    Linode 4096
+          ==> default: 6                                    Linode 8192
+          ==> default: 7                                    Linode 16384
+          ==> default: 8                                    Linode 32768
+          ==> default: 9                                    Linode 49152
+          ==> default: 10                                   Linode 65536
+          ==> default: 12                                   Linode 98304
+
+Get a list of Linodes status
+    Command: vagrant linode servers
+          ==> default: LinodeID Label                          DataCenter           Plan       Status
+          ==> default: 16123    srv2                           3                    0          1
+          ==> default: 320326   srv1                           4                    2          1
+
+Vagrant File
+    Vagrant.configure('2') do |config|
+
+      config.vm.provider :linode do |provider, override|
+      override.ssh.private_key_path = '~/.ssh/id_rsa'
+      #override.vm.box = 'linode/ubuntu1404'
+      #override.vm.box_url = "https://github.com/displague/vagrant-linode/raw/master/box/linode.box"
+      config.vm.box = 'linode/ubuntu1404'
+
+      provider.api_key = 'PDBQmEZf4jd4llBXVRkvEOKAIoYlkiqCu6D1EvecyGFaEoq0vDSuuCFuSr6SbrCd'
+      provider.distribution = 'Ubuntu 14.04'
+      provider.datacenter = 'fremont'
+      provider.plan = 'Linode 1024'
+      # provider.planid = <int>
+      # provider.paymentterm = <*1*,12,24>
+      # provider.datacenterid = <int>
+      # provider.image = <string>
+      # provider.imageid = <int>
+      # provider.kernel = <string>
+      # provider.kernelid = <int>
+      # provider.private_networking = <boolean>
+      # provider.stackscript = <string> # Not Supported Yet
+      # provider.stackscriptid = <int> # Not Supported Yet
+      # provider.distributionid = <int>
+
+      # Shell Scripts
+      config.vm.provision :shell, path: "setup.sh"
+      config.vm.provision :shell, path: "apache.sh"
+    end
+  end

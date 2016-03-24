@@ -1,0 +1,36 @@
+apache2
+Installing Apache2:
+
+Error
+
+==> default: AH00557: apache2: apr_sockaddr_info_get() failed for vagranttest
+==> default: AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+==> default:  *
+==> default: Setting up ssl-cert (1.0.33) ...
+==> default: hostname:
+==> default: Name or service not known
+==> default: make-ssl-cert: Could not get FQDN, using "vagranttest".
+==> default: make-ssl-cert: You may want to fix your /etc/hosts and/or DNS setup and run
+==> default: make-ssl-cert: make-ssl-cert generate-default-snakeoil --force-overwrite
+==> default: make-ssl-cert: again.
+==> default: Processing triggers for libc-bin (2.19-0ubuntu6.7) ...
+==> default: Processing triggers for ureadahead (0.100.0-16) ...
+==> default: Processing triggers for ufw (0.34~rc-0ubuntu2) ...
+==> default: mv:
+==> default: cannot stat ‘/etc/apache2/ports1.conf’
+==> default: : No such file or directory
+==> default: Site 000-default disabled.
+==> default: To activate the new configuration, you need to run:
+==> default:   service apache2 reload
+==> default: ERROR: Site vhost does not exist!
+==> default:  * Reloading web server apache2
+==> default:  *
+==> default:  * The apache2 configtest failed. Not doing anything.
+==> default: Output of config test was:
+==> default: apache2: Syntax error on line 144 of /etc/apache2/apache2.conf: Could not open configuration file /etc/apache2/ports.conf: No such file or directory
+==> default: Action 'configtest' failed.
+==> default: The Apache error log may have more information.
+The SSH command responded with a non-zero exit status. Vagrant
+assumes that this means the command failed. The output for this command
+should be in the log above. Please read the output to determine what
+went wrong.
