@@ -1,0 +1,15 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'vsphere'
+Vagrant.configure("2") do |config|
+  config.vm.box = 'opentable/win-2008r2-standard-amd64-nocm'
+  #config.vm.box_url = 'example_box/dummy.box'
+
+  config.vm.provider :vsphere do |vsphere|
+    vsphere.host = '192.168.1.125'
+    #vsphere.compute_resource_name = 'YOUR COMPUTE RESOURCE'
+    #vsphere.resource_pool_name = 'YOUR RESOURCE POOL'
+    #vsphere.template_name = '/PATH/TO/YOUR VM TEMPLATE'
+    vsphere.name = 'Centos'
+    vsphere.user = 'root'
+    vsphere.password = '3rindal3'
+  end
+end

@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "gce"
+
+  config.vm.provider :google do |google, override|
+    google.google_project_id = "MY_PROJECT_ID"
+    google.google_client_email = "MY_ACCOUNT@MY_PROJECT_ID.iam.gserviceaccount.com"
+    google.google_json_key_location = "/absolute/path/to/google_json_key.json"
+    google.zone = "us-central1-b"
+    google.machine_type= "n1-standard-1"
+    # google.machine_type = "n1-highmem-2"
+    # google.machine_type = "n1-standard-16"
+    # google.machine_type = "n1-highmem-8"
+    google.name = "gce-instance"
+    google.image = "ubuntu-1404-trusty-v20160222" # may change, use "gcloud compute images list" to check
+    # google.image = "image-ds"
+    google.disk_name = "disk-ds" # ds for data science
+    google.disk_size = "10"
+    override.ssh.username = "MY_USERNAME"
+    override.ssh.private_key_path = "~/.ssh/id_rsa"
+  end
+  config.vm.provision :shell, path: "provision.sh"

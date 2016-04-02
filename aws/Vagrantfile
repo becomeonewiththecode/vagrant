@@ -1,0 +1,16 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'aws'
+Vagrant.configure(2) do |config|
+  config.vm.box = "dummy"
+  config.vm.provider :aws do | aws, override|
+  config.vm.hostname = "websrv-001"
+  aws.access_key_id = "AKIAIG23TGAB3OA7P2MA"
+  aws.secret_access_key = "yAsLc271ajNOrH/qLmXF9BtriFZp4J1ipFWhOLyx"
+  aws.keypair_name = "cmills_key"
+  aws.region = "us-east-1"
+  aws.instance_type = "t2.micro"
+  aws.ami = "ami-8fcee4e5"
+  #aws.security_groups = ["api_group"]
+  override.ssh.username = "ubuntu"
+  #override.ssh.private_key_path = "/home/oss/.ssh/id_rsa"
+end
+end

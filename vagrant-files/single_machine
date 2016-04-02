@@ -1,0 +1,17 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'digital_ocean'
+Vagrant.configure(2) do |config|
+  config.vm.box = "digital_ocean"
+  config.vm.hostname = 'devsrv.opensitesolutions.com'
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+    config.vm.provider :digital_ocean do |provider|
+    	provider.token = '6cbdb1572816b5bfab6c07309e9772ad4e030fb7df361e051ca744fa49cfc819'
+    	provider.image = 'ubuntu-14-04-x64'
+    	provider.region = 'nyc2'
+    	provider.size = '512mb'
+    end
+    config.vm.provision "ansible" do |ansible|
+    	ansible.playbook = "install_apps.yml"
+    	# ansible.playbook = "install_users.yml"
+	    ansible.verbose = 'vv' #accepted values: from 'v' to 'vvvv'
+    end
+end
