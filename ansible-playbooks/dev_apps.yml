@@ -1,0 +1,22 @@
+---
+- hosts:  all
+  tasks:
+    - name: Update Packages
+      apt: update_cache=yes
+
+    - name: Install Application Packages
+      apt:  pkg={{ item }}
+      with_items:
+          - git
+          - curl
+          - apache2
+          - mysql-server
+          - vagrant
+          - docker.io
+          - python-pip
+
+    - name: Add configuration management tools
+      apt: pkg={{ item }}
+      with_items:
+          - puppet
+          - ansible

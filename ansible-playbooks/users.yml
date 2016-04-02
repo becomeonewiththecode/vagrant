@@ -1,0 +1,10 @@
+---
+- hosts: all
+- tasks:
+    - name: Install users
+      vars:
+        password: $1$SomeSalt$UqddPX3r4kH3UL5jq5/ZI.
+      user: name={{ item.name }} password={{ item.password }} state=present groups={{ item.groups }}
+      with_items:
+        {name: 'cmills', password: [[password]], groups: 'root'}
+        {name: 'dthornton', password: {{password}}, groups: 'root'}

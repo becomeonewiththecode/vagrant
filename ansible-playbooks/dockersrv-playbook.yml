@@ -1,0 +1,14 @@
+---
+- hosts:  all
+  tasks:
+    - name: Update Packages
+      apt: update_cache=yes
+
+    - name: Install Application Packages
+      apt:  pkg={{ item }}
+      with_items:
+          - curl
+          - git
+          - docker.io
+          - gccgo-go
+          - python-pip

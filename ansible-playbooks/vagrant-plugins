@@ -1,0 +1,12 @@
+- name: Install Digital ocean plugin
+  shell: vagrant plugin install vagrant-digitalocean
+- name: Install Vagratn Git plugin
+  shell: vagrant plugin install vagrant-git
+- name: Install Vagrant GCE plugin
+  shell: vagrant plugin install vagrant-google
+- name: Install Vagrant AWS plugin
+  shell: vagrant plugin install vagrant-aws
+- name: install Vagrant Linode plugin
+  shell: vagrant plugin install vagrant-linode
+- name: install vagrant proxmox plugin
+  shell: vagrant plugin install vagrant-fabric

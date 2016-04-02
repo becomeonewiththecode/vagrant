@@ -1,0 +1,13 @@
+---
+- hosts:  all
+  tasks:
+    - name: Update Packages to latest
+      apt: update_cache=yes
+
+    - name: Install Docker and supporting Applications
+      apt:  pkg={{ item }}
+      with_items:
+          - git
+          - curl
+          - docker.io
+          - python-pip
