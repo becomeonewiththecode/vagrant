@@ -1,9 +1,0 @@
----
-- hosts: all
-  tasks:
-    - name: Install Packages
-      sudo: yes
-      apt:  pkg={{ item }}
-      with_items:
-          - git
-          - curl
