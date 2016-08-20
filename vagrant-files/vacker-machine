@@ -19,5 +19,4 @@ Vagrant.configure(2) do |config|
         ansible.playbook = "ansible/vagrantsrv-playbook.yml"
       end
     end
-
 end
