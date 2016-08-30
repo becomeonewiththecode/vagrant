@@ -1,0 +1,9 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "tnarik/solaris10-minimal"
+   config.vm.provider "virtualbox" do |vb|
+   config.vm.synced_folder ".","/vagrant"
+   config.vm.synced_folder "~/Documents","/vagrant"
+     vb.gui = true
+     vb.memory = "1024"
+   end
+end
