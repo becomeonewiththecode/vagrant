@@ -1,0 +1,14 @@
+VAGRANTFILE_API_VERSION = "2"
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+Vagrant.configure(VAGRANTFILE_API_VERSION) do | config|
+	config.vm.define "centos6-1" do |centos1|
+		centos1.vm.box = "centos/6"
+		centos1.vm.hostname = "centos1"
+		centos1.vm.network "private_network", ip: "172.23.1.5"
+	end 
+	config.vm.define "centos6-2" do |centos2|
+		centos2.vm.box = "centos/6"
+		centos2.vm.hostname = "centos2"
+		centos2.vm.network "private_network", ip: "172.23.1.6"
+	end
+end
