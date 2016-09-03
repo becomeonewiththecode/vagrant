@@ -4,11 +4,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do | config|
 	config.vm.define "centos6-1" do |centos1|
 		centos1.vm.box = "centos/6"
 		centos1.vm.hostname = "centos1"
-		centos1.vm.network "public_network", ip: "192.168.1.220"
+		# This will create a second interface within the vm bridged with my laptop's wifi interface
+		centos1.vm.network "public_network", :bridge => "wlan0", :ip => "192.168.1.220"
 	end 
 	config.vm.define "centos6-2" do |centos2|
 		centos2.vm.box = "centos/6"
 		centos2.vm.hostname = "centos2"
-		centos2.vm.network "public_network", ip: "192.168.1.221"
+		# This will create a second interface within the vm bridged with my laptop's wifi interface
+		centos2.vm.network "public_network", :bridge => "wlan0", :ip => "192.168.1.221"
 	end
 end
