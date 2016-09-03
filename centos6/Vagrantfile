@@ -4,11 +4,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do | config|
 	config.vm.define "centos6-1" do |centos1|
 		centos1.vm.box = "centos/6"
 		centos1.vm.hostname = "centos1"
-		centos1.vm.network "private_network", ip: "172.23.1.5"
+		centos1.vm.network "public_network", ip: "192.168.1.220"
 	end 
 	config.vm.define "centos6-2" do |centos2|
 		centos2.vm.box = "centos/6"
 		centos2.vm.hostname = "centos2"
-		centos2.vm.network "private_network", ip: "172.23.1.6"
+		centos2.vm.network "public_network", ip: "192.168.1.221"
 	end
 end
