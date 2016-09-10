@@ -7,4 +7,3 @@
       user: name={{ item.name }} password={{ item.password }} state=present groups={{ item.groups }}
       with_items:
         {name: 'cmills', password: [[password]], groups: 'root'}
-        {name: 'dthornton', password: {{password}}, groups: 'root'}
