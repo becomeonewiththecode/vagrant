@@ -1,16 +1,41 @@
 VAGRANTFILE_API_VERSION = "2"
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 Vagrant.configure(VAGRANTFILE_API_VERSION) do | config|
+
 	config.vm.define "centos6-1" do |centos1|
 		centos1.vm.box = "centos/6"
 		centos1.vm.hostname = "centos1"
 		# This will create a second interface within the vm bridged with my laptop's wifi interface
-		centos1.vm.network "public_network", :bridge => "wlan0", :ip => "192.168.1.220"
-	end 
+		centos1.vm.network "public_network", :bridge => "wlp4s0", :ip => "192.168.1.220"
+		config.vm.provider "virtualbox" do |vb|
+			vb.memory = "512"
+			vb.name = "centos-srv1"
+		end
+	end
+
 	config.vm.define "centos6-2" do |centos2|
 		centos2.vm.box = "centos/6"
 		centos2.vm.hostname = "centos2"
 		# This will create a second interface within the vm bridged with my laptop's wifi interface
-		centos2.vm.network "public_network", :bridge => "wlan0", :ip => "192.168.1.221"
+		centos2.vm.network "public_network", :bridge => "wlp4s0", :ip => "192.168.1.221"
+		config.vm.provider "virtualbox" do |vb|
+			vb.memory = "512"
+			vb.name = "centos-srv2"
+		end
+	end
+
+	config.vm.define "centos6-3" do |centos3|
+		centos3.vm.box = "centos/6"
+		centos3.vm.hostname = "centos3"
+		# This will create a second interface within the vm bridged with my laptop's wifi interface
+		centos3.vm.network "public_network", :bridge => "wlp4s0", :ip => "192.168.1.222"
+		config.vm.provider "virtualbox" do |vb|
+			vb.memory = "512"
+			vb.name = "centos-srv3"
+		end
+		centos3.vm.provision "ansible" do |ansible|
+        		ansible.playbook = "../ansible-playbooks/create_accounts.yml"
+			ansible.verbose = 'vvvv'
+		end
 	end
 end
