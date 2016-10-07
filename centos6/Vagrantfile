@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do | config|
 		centos1.vm.network "public_network", :bridge => "wlp4s0", :ip => "192.168.1.220"
 		config.vm.provider "virtualbox" do |vb|
 			vb.memory = "512"
-			vb.name = "centos-srv1"
+			vb.name = "centos6-srv1"
 		end
 	end
 
@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do | config|
 		centos2.vm.network "public_network", :bridge => "wlp4s0", :ip => "192.168.1.221"
 		config.vm.provider "virtualbox" do |vb|
 			vb.memory = "512"
-			vb.name = "centos-srv2"
+			vb.name = "centos6-srv2"
 		end
 	end
 
@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do | config|
 		centos3.vm.network "public_network", :bridge => "wlp4s0", :ip => "192.168.1.222"
 		config.vm.provider "virtualbox" do |vb|
 			vb.memory = "512"
-			vb.name = "centos-srv3"
+			vb.name = "centos6-srv3"
 		end
 		centos3.vm.provision "ansible" do |ansible|
         		ansible.playbook = "../ansible-playbooks/create_accounts.yml"

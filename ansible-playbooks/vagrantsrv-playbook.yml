@@ -1,11 +1,13 @@
 ---
-- hosts:  all
+- hosts: all 
+  become: yes
+  become_user: vagrant
   tasks:
     - name: Update Packages
-      apt: update_cache=yes
+      yum: update_cache=yes
 
     - name: Install Application Packages
-      apt:  pkg={{ item }}
+      yum:  pkg={{ item }}
       with_items:
           - curl
           - git
